@@ -1,0 +1,15 @@
+User: <%= @post.user.email %><br />
+Title:<%= @post.title %><br />
+Body: <%= @post.body %><br />
+<%= link_to "Write Comment", new_post_postcomment_path(@post.id) %><br />
+<% @comments.each do |comment| %>
+User <%= comment.user.userparam.firstname %> write
+<%= comment.body %>
+<% end %>
+<% if @post.user_id == current_user.id %>
+
+<%= link_to "Edit", edit_post_path(@post.id) %> |
+
+<%= link_to "Delete", post_path(@post.id), method: :delete %><br />
+
+<% end %>

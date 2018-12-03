@@ -1,0 +1,23 @@
+<%= form_for @userparam, url: userparam_path(current_user.id) do |f| %>
+<% if @userparam.errors.any? %>
+  <div id="error_explanation"> 
+    <h2><%= pluralize(@userparam.errors.count, "error") %> prohibited this article from being saved:</h2>
+ 
+    <ul>
+    <% @userparam.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<p>Firstname</p><%= f.text_field :firstname%><br>
+<p>Lastname</p><%= f.text_field :lastname%><br>
+<p>Age</p><%= f.text_field :age%><br>
+<p>Avatar</p><%= f.file_field :avatar %><br>
+
+<%= f.submit "Update" %>
+	
+<% end %>
+  

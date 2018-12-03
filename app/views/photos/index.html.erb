@@ -1,0 +1,17 @@
+<%= link_to "Add new photo", new_photo_path %> 
+
+<% if @photos.nil? %>
+<% Gallery is empty %>
+<% else %>
+<% @photos.each do |photo| %>
+	<%= photo.title %><br />
+	<%= photo.description %><br />
+	<%= image_tag(photo.image_url, size: "200x100") %><br />
+
+	<% if photo.user_id == current_user.id %>
+	<%= link_to "Edit photo", edit_photo_path(photo.id) %>
+    <%= link_to "Delete photo", photo_path(photo.id), method: :delete, data: { confirm: 'Are you sure?'} %>
+	<% %><br />
+	<% end %>
+	<% end %>
+	<% end %>

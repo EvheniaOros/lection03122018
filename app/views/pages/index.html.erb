@@ -1,0 +1,14 @@
+<% if @posts == [] %>
+    <p>Create new post</p>
+<% else %>
+    <% @posts.each do |post| %>
+    	<%= image_tag post.user.userparam.avatar.url(:small) %> <br>
+    	User <%= post.user.email %>  write: <br />
+    	<strong>title</strong> <br>
+   		<%= post.title %><br/>
+   		<strong>body</strong> <br>
+    	<%= post.body %> <br>
+		<%= link_to "Read More", post_path(post.id) %>
+   		<hr>
+    <% end %>
+<% end %>
