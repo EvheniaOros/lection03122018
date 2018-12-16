@@ -21,6 +21,7 @@ class UserparamsController < ApplicationController
     @userparam = Userparam.find_by(user_id: current_user.id)
      if @userparam.update(profile_params)
       redirect_to userparam_path(@userparam.id)
+
     else
       render 'new'
 

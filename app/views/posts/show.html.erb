@@ -1,10 +1,20 @@
 User: <%= @post.user.email %><br />
 Title:<%= @post.title %><br />
 Body: <%= @post.body %><br />
-<%= link_to "Write Comment", new_post_postcomment_path(@post.id) %><br />
+<hr>
 <% @comments.each do |comment| %>
 User <%= comment.user.userparam.firstname %> write
 <%= comment.body %>
+<% end %>
+<h2>Write comment here</h2>
+<%= form_for :post_comment %>
+
+
+
+
+<p>Body</p><%= f.text_area :body, size: "60x12" %><br />
+<%= f.submit "Create" %>
+	
 <% end %>
 <% if @post.user_id == current_user.id %>
 

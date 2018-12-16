@@ -1,51 +1,55 @@
 class PostsController < ApplicationController
   	before_action :authenticate_user!
   	before_action :find_post, only: [ :edit, :update, :destroy]
-  def index
+   def index
+    
   end
+  
   def new
-  	@post = Post.new
+    @post = Post.new
   end
+  
   def create
-  	@post = current_user.posts.build(post_params)
-  	if @post.save
+    @post = current_user.posts.build(post_params)
+    if @post.save
       flash[:notice] = "Post successfully created"
- 
-  		redirect_to root_path
+      redirect_to root_path
     else
       flash[:error] = "Post has error"
       render 'new'
-  	end
+    end  
   end
+  
   def show
     @comments = @post.post_comments
-  	
   end
+  
   def edit
-  	
   end
+  
   def update
-  	
-     @post.update(post_params)
-     if @post.save
+    if @post.update(post_params)
       flash[:notice] = "Post successfully updated"
-     	redirect_to root_path(@post.id)
-     else
-      flash[:error] = "Post has error with created"
+      redirect_to post_path(@post.id)
+    else
+      flash[:error] = "Post has error"
       render 'edit'
-     end
-     
+    end
+    
   end
+  
   def destroy
-  	
     @post.destroy
     redirect_to root_path
-  end 
-  def find_post
-  	@post = Post.find_by(id: params[:id])
   end
-  private 
+  
+private
+
   def post_params
-  	params.require(:post).permit(:user_id, :title, :body)
+    params.require(:post).permit(:user_id, :title, :body)
+  end
+  
+  def find_post
+    @post = Post.find_by(id: params[:id])
   end
 end
